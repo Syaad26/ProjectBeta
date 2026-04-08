@@ -2,7 +2,7 @@
 //  API CLIENT — komunikasi dengan backend server
 // ============================================================
 
-const API_URL = "libraryosjs-production.up.railway.app/api";
+const API_URL = "https://libraryosjs-production.up.railway.app/api";
 
 async function apiCall(endpoint, method = "GET", data = null) {
   const options = {
