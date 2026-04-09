@@ -40,8 +40,8 @@ async function getBook(id) {
 }
 
 // POST tambah buku
-async function addBook(judul, pengarang, stok, gambar = "") {
-  return apiCall("/books", "POST", { judul, pengarang, stok, gambar });
+async function addBook(judul, pengarang, stok, cover = "") {
+  return apiCall("/books", "POST", { judul, pengarang, stok, cover });
 }
 
 // PUT update stok

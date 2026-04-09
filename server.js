@@ -5,7 +5,9 @@ require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017";
+const MONGODB_URI =
+  process.env.MONGODB_URI ||
+  "mongodb+srv://225443018_db_user:Polmansyad@cluster0.yns6u6f.mongodb.net/?appName=Cluster0";
 const DB_NAME = process.env.DB_NAME || "book_inventary";
 
 let db;
@@ -55,7 +57,11 @@ app.get("/api/books", async (req, res) => {
     }
 
     const books = await booksCollection.find(query).toArray();
-    res.json(books);
+    const normalizedBooks = books.map((b) => ({
+      ...b,
+      cover: b.cover || b.gambar || "",
+    }));
+    res.json(normalizedBooks);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -67,7 +73,7 @@ app.get("/api/books/:id", async (req, res) => {
     const bookId = parseInt(req.params.id, 10);
     const book = await booksCollection.findOne({ _id: bookId });
     if (!book) return res.status(404).json({ error: "Buku tidak ditemukan" });
-    res.json(book);
+    res.json({ ...book, cover: book.cover || book.gambar || "" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -76,7 +82,7 @@ app.get("/api/books/:id", async (req, res) => {
 // POST - Tambah buku baru (pakai _id custom)
 app.post("/api/books", async (req, res) => {
   try {
-    const { judul, pengarang, stok } = req.body;
+    const { judul, pengarang, stok, cover, gambar } = req.body;
     if (!judul || !pengarang) {
       return res.status(400).json({ error: "Judul dan pengarang harus diisi" });
     }
@@ -97,7 +103,7 @@ app.post("/api/books", async (req, res) => {
       pengarang,
       stok: parseInt(stok) || 0,
       addr,
-      gambar: req.body.gambar || "",
+      cover: cover || gambar || "",
       createdAt: new Date(),
     };
 
@@ -189,7 +195,7 @@ app.post("/api/seed", async (req, res) => {
         pengarang: "Bjarne Stroustrup",
         stok: 5,
         addr: "0x8A00",
-        gambar: "",
+        cover: "",
       },
       {
         _id: 2,
@@ -197,7 +203,7 @@ app.post("/api/seed", async (req, res) => {
         pengarang: "Robert C. Martin",
         stok: 3,
         addr: "0x8A40",
-        gambar: "",
+        cover: "",
       },
       {
         _id: 3,
@@ -205,7 +211,7 @@ app.post("/api/seed", async (req, res) => {
         pengarang: "Andrew Hunt",
         stok: 7,
         addr: "0x8A80",
-        gambar: "",
+        cover: "",
       },
       {
         _id: 4,
@@ -213,7 +219,7 @@ app.post("/api/seed", async (req, res) => {
         pengarang: "Abelson & Sussman",
         stok: 2,
         addr: "0x8AC0",
-        gambar: "",
+        cover: "",
       },
       {
         _id: 5,
@@ -221,7 +227,7 @@ app.post("/api/seed", async (req, res) => {
         pengarang: "Gang of Four",
         stok: 1,
         addr: "0x8B00",
-        gambar: "",
+        cover: "",
       },
     ];
 
