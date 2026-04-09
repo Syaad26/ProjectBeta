@@ -41,7 +41,7 @@ body {
 /* ── NOISE TEXTURE overlay ── */
 body {
   /*background: var(--paper);*/
-  background-image: url('backgroundedit.jpg');
+  background-image: url("background.jpeg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -137,12 +137,11 @@ header {
 .section-header {
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
   justify-content: center;
   gap: 8px;
   margin-bottom: 32px;
 }
-
 
 .section-title {
   font-family: "Cinzel Decorative", "Playfair Display", serif;
@@ -472,7 +471,7 @@ header {
   overflow-y: auto;
   transform: translateY(-50%);
   z-index: 1000;
-  box-shadow: -8px 0 30px rgba(0,0,0,0.3);
+  box-shadow: -8px 0 30px rgba(0, 0, 0, 0.3);
   transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
@@ -494,16 +493,17 @@ header {
   font-weight: bold;
   cursor: pointer;
   z-index: 999;
-  box-shadow: 0 8px 25px rgba(201,79,30,0.4);
+  box-shadow: 0 8px 25px rgba(201, 79, 30, 0.4);
   transition: all 0.3s ease;
 }
 
 .side-toggle:hover {
   transform: scale(1.05);
-  box-shadow: 0 12px 35px rgba(201,79,30,0.5);
+  box-shadow: 0 12px 35px rgba(201, 79, 30, 0.5);
 }
 
-.panel-block {}
+.panel-block {
+}
 .panel-label {
   font-family: var(--mono);
   font-size: 10px;
@@ -528,7 +528,9 @@ header {
   border: 1.5px dashed var(--border);
   border-radius: var(--radius);
   overflow: hidden;
-  transition: border-color 0.2s, background 0.2s;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
   background: var(--paper);
   margin-bottom: 0;
 }
@@ -785,14 +787,28 @@ header {
   animation: logIn 0.2s ease both;
 }
 @keyframes logIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
-.log-ptr { color: #c084fc; }
-.log-addr { color: #5eead4; }
-.log-val { color: #fbbf24; }
-.log-op { color: #6ee7b7; }
-.log-info { color: #94a3b8; }
+.log-ptr {
+  color: #c084fc;
+}
+.log-addr {
+  color: #5eead4;
+}
+.log-val {
+  color: #fbbf24;
+}
+.log-op {
+  color: #6ee7b7;
+}
+.log-info {
+  color: #94a3b8;
+}
 
 /* Toast */
 #toast {
